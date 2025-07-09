@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2023.2">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="66" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="12" />
+          <Fields>
+            <Field name="data" />
+          </Fields>
+          <Data>
+            <r>
+              <c>Button A: X+94, Y+34</c>
+            </r>
+            <r>
+              <c>Button B: X+22, Y+67</c>
+            </r>
+            <r>
+              <c>Prize: X=8400, Y=5400</c>
+            </r>
+            <r>
+              <c>Button A: X+26, Y+66</c>
+            </r>
+            <r>
+              <c>Button B: X+67, Y+21</c>
+            </r>
+            <r>
+              <c>Prize: X=12748, Y=12176</c>
+            </r>
+            <r>
+              <c>Button A: X+17, Y+86</c>
+            </r>
+            <r>
+              <c>Button B: X+84, Y+37</c>
+            </r>
+            <r>
+              <c>Prize: X=7870, Y=6450</c>
+            </r>
+            <r>
+              <c>Button A: X+69, Y+23</c>
+            </r>
+            <r>
+              <c>Button B: X+27, Y+71</c>
+            </r>
+            <r>
+              <c>Prize: X=18641, Y=10279</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MakeColumns.MakeColumns">
+        <Position x="258" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumColumns>3</NumColumns>
+          <IsHorizontal value="True" />
+          <GroupFields orderChanged="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMakeColumns" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="354" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="tonumber(REGEX_Replace([Column_1_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$1&quot;))" field="A_X" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_1_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$2&quot;))" field="A_Y" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_2_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$1&quot;))" field="B_X" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_2_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$2&quot;))" field="B_Y" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_3_data], &quot;\D+(\d+)\D+(\d+)&quot;,&quot;$1&quot;))" field="P_X" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_3_data], &quot;\D+(\d+)\D+(\d+)&quot;,&quot;$2&quot;))" field="P_Y" size="8" type="Int64" />
+            <FormulaField expression="([P_X]*[B_Y]-[P_Y]*[B_X])/([A_X]*[B_Y]-[A_Y]*[B_X])" field="a" size="8" type="Int64" />
+            <FormulaField expression="([P_X]-[A_X]*[a])/[B_X]" field="b" size="8" type="Int64" />
+            <FormulaField expression="IF [A_X]*a+[B_X]*b=[P_X] &amp;&amp;&#xA;[A_Y]*a+[B_Y]*b=[P_Y] THEN &quot;Y&quot;&#xA;ELSE &quot;N&quot;&#xA;ENDIF" field="CheckAnswer" size="1073741823" type="V_WString" />
+            <FormulaField expression="3*a+b" field="tokens" size="8" type="Int64" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>A_X = tonumber(REGEX_Replace([Column_1_data], "\D+(\d+)\D+(\d+)", "$1"))
+A_Y = t...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="450" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>CheckAnswer</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-27 15:00:48</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>Y</Operand>
+              <StartDate>2024-12-27 15:00:48</StartDate>
+              <EndDate>2024-12-27 15:00:48</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[CheckAnswer] = "Y"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="558" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="tokens" action="Sum" rename="Sum_tokens" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Part 1</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="66" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\esthe\Downloads\AoC Challenge Starter Kit\2024_AoC_Input_Day_13.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>2024_AoC_Input_Day_13.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="data" size="254" source="File: C:\Users\esthe\Downloads\AoC Challenge Starter Kit\2024_AoC_Input_Day_13.csv" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="162" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>IsNotEmpty</Operator>
+            <Field>data</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-27 15:05:38</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>
+              </Operand>
+              <StartDate>2024-12-27 15:05:38</StartDate>
+              <EndDate>2024-12-27 15:05:38</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>!IsEmpty([data])</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="354" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="tonumber(REGEX_Replace([Column_1_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$1&quot;))" field="A_X" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_1_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$2&quot;))" field="A_Y" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_2_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$1&quot;))" field="B_X" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_2_data], &quot;\D+(\d+)\D+(\d+)&quot;, &quot;$2&quot;))" field="B_Y" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_3_data], &quot;\D+(\d+)\D+(\d+)&quot;,&quot;$1&quot;))+10000000000000" field="P_X" size="8" type="Int64" />
+            <FormulaField expression="tonumber(REGEX_Replace([Column_3_data], &quot;\D+(\d+)\D+(\d+)&quot;,&quot;$2&quot;))+10000000000000" field="P_Y" size="8" type="Int64" />
+            <FormulaField expression="([P_X]*[B_Y]-[P_Y]*[B_X])/([A_X]*[B_Y]-[A_Y]*[B_X])" field="a" size="8" type="Int64" />
+            <FormulaField expression="([P_X]-[A_X]*[a])/[B_X]" field="b" size="8" type="Int64" />
+            <FormulaField expression="IF [A_X]*a+[B_X]*b=[P_X] &amp;&amp;&#xA;[A_Y]*a+[B_Y]*b=[P_Y] THEN &quot;Y&quot;&#xA;ELSE &quot;N&quot;&#xA;ENDIF" field="CheckAnswer" size="1073741823" type="V_WString" />
+            <FormulaField expression="3*a+b" field="tokens" size="8" type="Int64" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>A_X = tonumber(REGEX_Replace([Column_1_data], "\D+(\d+)\D+(\d+)", "$1"))
+A_Y = t...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="450" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>CheckAnswer</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2024-12-27 15:00:48</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>Y</Operand>
+              <StartDate>2024-12-27 15:00:48</StartDate>
+              <EndDate>2024-12-27 15:00:48</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[CheckAnswer] = "Y"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="558" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="tokens" action="Sum" rename="Sum_tokens" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Part 2</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="True" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="True" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="True" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Day13</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="55c8a957-2db1-4ae1-9c10-3fae2ee7ab2c" />
+      <Telemetry>
+        <PreviousWorkflowId value="cf00caf4-11e0-4d89-8d1f-34d32b5b1453" />
+        <OriginWorkflowId value="cf00caf4-11e0-4d89-8d1f-34d32b5b1453" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
